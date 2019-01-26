@@ -34,17 +34,13 @@
   </tbody>
 </table>
 
-
-<%= Time.now.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y %I:%M %p") %>
-<%= Time.now.at_beginning_of_month.strftime("%m/%d/%y %w") %>
-<%= firstDay = Time.now.at_beginning_of_month.strftime("%w").to_i %>
-<!-- sunday is 0 -->
-<br>
-
-<% length = Time.now.end_of_month.day.to_i %>
+<% firstDay = @firstDay %>
+<% length = @length %>
 <center>
-<h1><%= month = Time.now.strftime("%B") %></h1>
-<% month = Time.now.month.to_i %>
+  <%= button_to 'Last month', events_go_back_path, method: :post %>
+  <%= button_to 'Next month', events_go_forward_path, method: :post %>
+<h1><%= @monthName %></h1>
+<% month = @month %>
 <table>
   <thead>
     <tr>
