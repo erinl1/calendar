@@ -5,12 +5,17 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-    @firstDay = Time.now.at_beginning_of_month.strftime("%w").to_i
-    @length = Time.now.end_of_month.day.to_i
-    @monthName = Time.now.strftime("%B")
-    @month = Time.now.month.to_i
-  end
+    params[:month] ||= Time.now.month.to_i
+    params[:year] ||= Time.now.year.to_i
 
+    @month = params[:month].to_i
+    @year = params[:year].to_i
+    @date = DateTime.new(@year, @month, 1)
+    @firstDay = @date.strftime("%w").to_i
+    @length = @date.end_of_month.day.to_i
+    @monthName = @date.strftime("%B")
+
+  end
   # GET /events/1
   # GET /events/1.json
   def show

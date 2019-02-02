@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :events
-  post 'events/go_back'
-  post 'events/go_forward'
+  resources :events do
+  end
+
+get 'forward', to: 'date#forward'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

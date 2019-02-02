@@ -1,15 +1,23 @@
 <style>
   .box {
-    width: 120px;
-    height: 120px;
+    width: 80%;
+    height: 80%;
+  }
+  td {
+    width: 17%;
+    height: 100px;
+  }
+  tr {
+
   }
 </style>
-
+<div class = 'container'>
 <p id="notice"><%= notice %></p>
-
+<div class = "row">
+  <div class = 'col-md-4'>
+    <br>
 <h1>Events</h1>
-
-<table>
+<table class = 'table'>
   <thead>
     <tr>
       <th>Name</th>
@@ -33,23 +41,36 @@
     <% end %>
   </tbody>
 </table>
-
+<%= link_to 'New Event', new_event_path %>
 <% firstDay = @firstDay %>
 <% length = @length %>
+</div>
+<div class = 'col-md-8'>
 <center>
-  <%= button_to 'Last month', events_go_back_path, method: :post %>
-  <%= button_to 'Next month', events_go_forward_path, method: :post %>
-<h1><%= @monthName %></h1>
+
+<% if @month == 12 %>
+  <%= link_to "go back", events_path(month: @month - 1, year: @year) %>
+  <%= link_to "go forward", events_path(month: 1, year: @year + 1) %>
+<% elsif @month == 1 %>
+  <%= link_to "go back", events_path(month: 12, year: @year - 1) %>
+  <%= link_to "go forward", events_path(month: @month + 1, year: @year) %>
+<% else %>
+<%= link_to "go back", events_path(month: @month - 1, year: @year) %>
+<%= link_to "go forward", events_path(month: @month + 1, year: @year) %>
+<% end %>
+
+
+<h1><%= @monthName%> <%= @year %></h1>
 <% month = @month %>
-<table>
+<table class = 'table'>
   <thead>
     <tr>
       <th>sunday</th>
       <th>monday</th>
-      <th>tuesday></th>
+      <th>tuesday</th>
       <th>wednesday</th>
       <th>thursday</th>
-      <th>friday></th>
+      <th>friday</th>
       <th>saturday</th>
     </tr>
   </thead>
@@ -93,9 +114,11 @@
 <% end %>
 </tr>
 </table>
+</div>
 </center>
-<%= link_to 'New Event', new_event_path %>
 
+</div>
+</div>
 <script>
 
 </script>
